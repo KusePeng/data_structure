@@ -98,6 +98,7 @@ public class SingleLinked {
             fast = fast.getNextNode().getNextNode();
             slow = slow.getNextNode();
         }
+        if(fast==null) return false;
         LinkedNode[] node = new LinkedNode[this.head.getData() / 2];
         LinkedNode p = this.head.getNextNode();
         int i=0;
