@@ -75,4 +75,77 @@ public class SortUtil {
 
     }
 
+    /**
+     * 归并排序
+     * 时间复杂度 logN
+     *
+     * @param arr
+     * @param start
+     * @param end
+     */
+    public static void mergerSort(int[] arr, int start, int end) {
+        if (start < end) {
+            int mid = (end + start) / 2;
+            mergerSort(arr, start, mid);
+            mergerSort(arr, mid + 1, end);
+            merger(arr, start, mid, end);
+        }
+    }
+
+    private static void merger(int[] arr, int start, int mid, int end) {
+        int temp[] = new int[arr.length];
+        int p = start;
+        int q = mid + 1;
+        int k = start;
+        while (p <= mid && q <= end) {
+            if (arr[p] <= arr[q]) {
+                temp[k++] = arr[p++];
+            } else {
+                temp[k++] = arr[q++];
+            }
+        }
+        while (p <= mid) {
+            temp[k++] = arr[p++];
+        }
+        while (q <= end) {
+            temp[k++] = arr[q++];
+        }
+        for (int i = start; i <= end; i++) {
+            arr[i] = temp[i];
+        }
+    }
+
+    /**
+     * 快速排序
+     * 时间复杂度 logN
+     *
+     * @param arr
+     * @param start
+     * @param end
+     */
+    public static void quickSort(int arr[], int start, int end) {
+        if (start < end) {
+            int i = partition(arr, start, end);
+            quickSort(arr, start, i - 1);
+            quickSort(arr, i + 1, end);
+        }
+
+    }
+
+    public static int partition(int arr[], int start, int end) {
+        int p = arr[end];
+        int i = start;
+        for (int j = start; j <= end; j++) {
+            if (arr[j] < p) {
+                int temp = arr[j];
+                arr[j] = arr[i];
+                arr[i] = temp;
+                i++;
+            }
+        }
+        int temp = arr[i];
+        arr[i] = p;
+        arr[end] = temp;
+        return i;
+    }
 }
